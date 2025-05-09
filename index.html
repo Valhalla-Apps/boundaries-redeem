@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Redeeming Your Gift...</title>
+  <script>
+    function getCode() {
+      const params = new URLSearchParams(window.location.search);
+      return params.get('code') || '';
+    }
+
+    function redirectToApp() {
+      const code = getCode();
+      const deepLink = `boundaries://redeem?code=${code}`;
+      const userAgent = navigator.userAgent || navigator.vendor;
+
+      // Try to open the app
+      window.location.href = deepLink;
+
+      // Fallback after 2 seconds
+      setTimeout(() => {
+        if (/android/i.test(userAgent)) {
+          window.location.href = 'https://play.google.com/store/apps/details?id=com.valhallaapps.boundaries';
+        } else if (/iPad|iPhone|iPod/.test(userAgent)) {
+          window.location.href = 'https://apps.apple.com/app/idYOUR_APP_ID';
+        } else {
+          document.getElementById("fallback").style.display = "block";
+        }
+      }, 2000);
+    }
+
+    window.onload = redirectToApp;
+  </script>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      padding: 50px;
+    }
+    #fallback {
+      display: none;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Redeeming Your Gift...</h1>
+  <p>Please wait while we open the Boundaries app.</p>
+  <div id="fallback">
+    <p>If nothing happened, please install the app from your store and try again.</p>
+  </div>
+</body>
+</html>
