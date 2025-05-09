@@ -3,7 +3,45 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Redeeming Your Gift...</title>
+  <title>Redeeming Your Boundaries Gift</title>
+  <link rel="icon" href="GAME.LOGO.MAIN.png">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #ffe6ee;
+      color: #333;
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    img.logo {
+      width: 240px;
+      margin-bottom: 20px;
+    }
+
+    img.footer-logo {
+      width: 160px;
+      margin-top: 60px;
+      opacity: 0.8;
+    }
+
+    .message {
+      font-size: 20px;
+      margin-top: 20px;
+    }
+
+    .fallback {
+      color: #b00020;
+      font-weight: bold;
+      margin-top: 30px;
+    }
+
+    .dev-note {
+      font-size: 12px;
+      color: #888;
+      margin-top: 40px;
+    }
+  </style>
   <script>
     function getCode() {
       const params = new URLSearchParams(window.location.search);
@@ -14,6 +52,9 @@
       const code = getCode();
       const deepLink = `boundaries://redeem?code=${code}`;
       const userAgent = navigator.userAgent || navigator.vendor;
+
+      window.location.href = deepLink;
+
 
       // Fallback after 2 seconds
       setTimeout(() => {
@@ -31,31 +72,21 @@
 
     window.onload = redirectToApp;
   </script>
-  <style>
-    body {
-      font-family: sans-serif;
-      text-align: center;
-      padding: 50px;
-    }
-    #fallback {
-      display: none;
-      margin-top: 20px;
-      color: red;
-    }
-  </style>
 </head>
 <body>
+  <img src="GAME.LOGO.MAIN.png" alt="Boundaries Logo" class="logo">
   <h1>Redeeming Your Gift...</h1>
-  <p>Please wait while we open the Boundaries app.</p>
+  <p class="message">Hang tight! We're opening the Boundaries app to redeem your gift code...</p>
 
-  <div id="fallback">
-    <p>⚠️ Couldn’t open the app automatically.<br>
-    Please install Boundaries from the store and try again.</p>
+  <div id="fallback" class="fallback" style="display:none;">
+    ⚠️ Couldn’t open the app automatically.<br>
+    Please install Boundaries from the store and try again.
   </div>
 
-  <p style="color: orange; font-size: 14px; margin-top: 40px;">
-    <!-- Dev Note: Update the Apple App Store link above once the app is live and has an App Store ID -->
-    🛠 Developer Reminder: Replace the Apple App Store URL with the real app ID once published.
-  </p>
+  <div class="dev-note">
+    🛠 Developer note: Remember to update the Apple Store link when your app is live.<br>
+  </div>
+
+  <img src="VALHALLA APPS LOGO.PNG" alt="Valhalla Apps Logo" class="footer-logo">
 </body>
 </html>
