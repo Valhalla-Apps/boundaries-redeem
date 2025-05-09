@@ -15,20 +15,19 @@
       const deepLink = `boundaries://redeem?code=${code}`;
       const userAgent = navigator.userAgent || navigator.vendor;
 
-      // Try to open the app
-      window.location.href = deepLink;
-
       // Fallback after 2 seconds
       setTimeout(() => {
         if (/android/i.test(userAgent)) {
           window.location.href = 'https://play.google.com/store/apps/details?id=com.valhallaapps.boundaries';
         } else if (/iPad|iPhone|iPod/.test(userAgent)) {
-          window.location.href = 'https://apps.apple.com/app/idYOUR_APP_ID';
+          // ❗️ DUMMY PLACEHOLDER LINK — UPDATE ONCE LIVE ON APP STORE
+          window.location.href = 'https://apps.apple.com/lookup?bundleId=com.valhallaapps.boundaries';
         } else {
           document.getElementById("fallback").style.display = "block";
         }
       }, 2000);
     }
+
 
     window.onload = redirectToApp;
   </script>
@@ -41,14 +40,22 @@
     #fallback {
       display: none;
       margin-top: 20px;
+      color: red;
     }
   </style>
 </head>
 <body>
   <h1>Redeeming Your Gift...</h1>
   <p>Please wait while we open the Boundaries app.</p>
+
   <div id="fallback">
-    <p>If nothing happened, please install the app from your store and try again.</p>
+    <p>⚠️ Couldn’t open the app automatically.<br>
+    Please install Boundaries from the store and try again.</p>
   </div>
+
+  <p style="color: orange; font-size: 14px; margin-top: 40px;">
+    <!-- Dev Note: Update the Apple App Store link above once the app is live and has an App Store ID -->
+    🛠 Developer Reminder: Replace the Apple App Store URL with the real app ID once published.
+  </p>
 </body>
 </html>
